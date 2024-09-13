@@ -8,11 +8,11 @@
     color: rgb(255, 255, 255);
 }
 
-.header {
+.container > header {
     padding: 20px 0px;
 }
 
-.header > a {
+.container > header > a {
     color: rgb(229, 9, 0);
     text-decoration: none;
     font-size: 20px;
