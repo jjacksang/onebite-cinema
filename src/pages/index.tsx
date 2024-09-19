@@ -2,11 +2,11 @@ import SearchAbleLayout from "@/components/searchable-layout";
 import { ReactNode } from "react";
 import style from "./index.module.css";
 import MovieItem from "@/components/movie-item";
-import { InferGetServerSidePropsType } from "next";
+import { InferGetStaticPropsType } from "next";
 import { fetchAllMovie } from "@/lib/fetch-movies";
 import fetchRandomMovie from "@/lib/fetch-random-books";
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
     const [allMovies, recoMovies] = await Promise.all([fetchAllMovie(), fetchRandomMovie()]);
     return {
         props: {
@@ -19,7 +19,7 @@ export const getServerSideProps = async () => {
 export default function Home({
     allMovies,
     recoMovies,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+}: InferGetStaticPropsType<typeof getStaticProps>) {
     return (
         <div className={style.container}>
             <section>

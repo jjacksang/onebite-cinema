@@ -6,9 +6,6 @@ export async function fetchAllMovie(q?: string): Promise<MovieData[]> {
     if (q) {
         baseURL += `/search?q=${q}`;
     }
-    //  else if (id) {
-    //     baseURL += `/${id}`;
-    // }
 
     try {
         const res = await fetch(baseURL);

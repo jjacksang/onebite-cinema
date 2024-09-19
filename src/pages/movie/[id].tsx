@@ -1,8 +1,16 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import style from "./[id].module.css";
 import fetchMovieItem from "@/lib/fetch-Movie-item";
+import { useRouter } from "next/router";
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getStaticPaths = () => {
+    return {
+        paths: [{ params: { id: "696047" } }, { params: { id: "1022789" } }],
+        fallback: "blocking",
+    };
+};
+
+export const getStaticProps = async (context: GetStaticPropsContext) => {
     const id = context.params!.id;
     const movie = await fetchMovieItem(Number(id));
 
@@ -18,8 +26,11 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     };
 };
 
-export default function Page({ movie }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-    console.log(movie);
+export default function Page({ movie }: InferGetStaticPropsType<typeof getStaticProps>) {
+    const router = useRouter();
+
+    if (router.isFallback) return "로딩중입니다!";
+
     if (!movie) return "문제가 발생하였습니다.";
 
     const {
