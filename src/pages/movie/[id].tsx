@@ -3,10 +3,18 @@ import style from "./[id].module.css";
 import fetchMovieItem from "@/pages/api/fetch-Movie-item";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { fetchAllMovie } from "../api/fetch-movies";
 
-export const getStaticPaths = () => {
+export const getStaticPaths = async () => {
+    const movies = await fetchAllMovie();
     return {
-        paths: [{ params: { id: "696047" } }, { params: { id: "1022789" } }],
+        paths: movies.map((movie) => {
+            return {
+                params: {
+                    id: movie.id.toString,
+                },
+            };
+        }),
         fallback: "blocking",
     };
 };
