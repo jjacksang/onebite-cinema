@@ -2,22 +2,10 @@ import { ReactNode, useEffect, useState } from "react";
 import SearchAbleLayout from "@/components/searchable-layout";
 import MovieItem from "@/components/movie-item";
 import style from "./index.module.css";
-import { GetServerSidePropsContext, InferGetStaticPropsType } from "next";
 import { fetchAllMovie } from "@/pages/api/fetch-movies";
 import { useRouter } from "next/router";
 import { MovieData } from "@/utils/type";
-
-// export const getStaticProps = async (context: GetServerSidePropsContext) => {
-//     const q = context.query.q;
-
-//     const movies = await fetchAllMovie(q as string);
-
-//     return {
-//         props: {
-//             movies,
-//         },
-//     };
-// };
+import Head from "next/head";
 
 export default function Page() {
     const [movies, setMovies] = useState<MovieData[]>([]);
@@ -37,6 +25,15 @@ export default function Page() {
 
     return (
         <div className={style.container}>
+            <Head>
+                <title>한 입 시네마 - 검색결과</title>
+                <meta property="og:image" content="/thumbnail.png" />
+                <meta property="og:title" content={q as string} />
+                <meta
+                    property="og:description"
+                    content="한 입 시네마 영화관에 오신걸 환영합니다!"
+                />
+            </Head>
             {movies.map((movie) => (
                 <MovieItem key={movie.id} {...movie} />
             ))}
