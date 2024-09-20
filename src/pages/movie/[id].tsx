@@ -1,6 +1,6 @@
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import style from "./[id].module.css";
-import fetchMovieItem from "@/lib/fetch-Movie-item";
+import fetchMovieItem from "@/pages/api/fetch-Movie-item";
 import { useRouter } from "next/router";
 
 export const getStaticPaths = () => {

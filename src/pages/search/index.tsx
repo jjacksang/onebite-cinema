@@ -3,7 +3,7 @@ import SearchAbleLayout from "@/components/searchable-layout";
 import MovieItem from "@/components/movie-item";
 import style from "./index.module.css";
 import { GetServerSidePropsContext, InferGetStaticPropsType } from "next";
-import { fetchAllMovie } from "@/lib/fetch-movies";
+import { fetchAllMovie } from "@/pages/api/fetch-movies";
 import { useRouter } from "next/router";
 import { MovieData } from "@/utils/type";
 
