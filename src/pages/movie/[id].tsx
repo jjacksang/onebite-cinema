@@ -8,10 +8,10 @@ import { fetchAllMovie } from "../api/fetch-movies";
 export const getStaticPaths = async () => {
     const movies = await fetchAllMovie();
     return {
-        paths: movies.map((movie) => {
+        paths: movies.map(({ id }) => {
             return {
                 params: {
-                    id: movie.id.toString,
+                    id: id.toString(),
                 },
             };
         }),
